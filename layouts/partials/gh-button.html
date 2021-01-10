@@ -1,0 +1,34 @@
+{{ $action := title .theme.mode }}
+{{ $icon := .theme.mode }}
+
+{{ $url := (printf "%v/%v" .user .name) }}
+{{ $label := printf "%v %v on GitHub" $action $url }}
+
+{{ if eq .theme.mode "follow" }}
+{{ $icon = "" }}
+{{ $label = printf "%v @%v on GitHub" $action .user }}
+{{ else if eq .theme.mode "sponsor" }}
+{{ $icon = "heart" }}
+{{ $url = printf "%v/%v" "sponsors" .user }}
+{{ else if eq .theme.mode "watch" }}
+{{ $icon = "eye" }}
+{{ $url = printf "%v/%v" $url "subscription" }}
+{{ else if eq .theme.mode "fork" }}
+{{ $icon = "repo-fork" }}
+{{ $url = printf "%v/%v" $url "fork" }}
+{{ else if eq .theme.mode "template" }}
+{{ $icon = "repo-template" }}
+{{ $url = printf "%v/%v" $url "generate" }}
+{{ else if eq .theme.mode "issue" }}
+{{ $icon = "issue-opened" }}
+{{ $url = printf "%v/%v" $url "issues" }}
+{{ else if eq .theme.mode "download" }}
+{{ $icon = "download" }}
+{{ $url = printf "%v/%v" $url "archive/master.zip" }}
+{{ end }}
+
+
+<a class="github-button {{.class}}" href="https://github.com/{{$url}}" {{if ne $icon "" }} data-icon="octicon-{{$icon}}"
+  {{end}} data-color-scheme="no-preference: {{.theme.default}}; light: {{.theme.light}}; dark: {{.theme.dark}};"
+  data-size="{{.theme.btn_size}}" {{with .theme.show_count}} data-show-count="true" {{end}} aria-label="{{$label}}">
+  {{ $action }}</a>
