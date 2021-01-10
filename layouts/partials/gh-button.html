@@ -28,7 +28,7 @@
 {{ end }}
 
 
-<a class="github-button {{.class}}" href="https://github.com/{{$url}}" {{if ne $icon "" }} data-icon="octicon-{{$icon}}"
-  {{end}} data-color-scheme="no-preference: {{.theme.default}}; light: {{.theme.light}}; dark: {{.theme.dark}};"
+<a class="github-button" href="https://github.com/{{$url}}" {{if ne $icon "" }} data-icon="octicon-{{$icon}}" {{end}}
+  data-color-scheme="no-preference: {{.theme.default}}; light: {{.theme.light}}; dark: {{.theme.dark}};"
   data-size="{{.theme.btn_size}}" {{with .theme.show_count}} data-show-count="true" {{end}} aria-label="{{$label}}">
   {{ $action }}</a>
