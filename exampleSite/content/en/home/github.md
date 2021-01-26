@@ -19,7 +19,7 @@ user = "negrel"
 
 # Button mode (default "star")
 # Valid options: ["follow", "sponsor", "watch", "star", "fork", "template", "issue", "download"]
-mode = "download"
+mode = "star"
 
 # Show the count (default true)
 show_count = true

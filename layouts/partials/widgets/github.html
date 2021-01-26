@@ -1,0 +1,45 @@
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<section id="github">
+  <div class="text-center w-full mb-8">
+    <h1 class="my-0 text-4xl sm:text-5xl md:text-6xl">
+      {{ .Title }}
+    </h1>
+    {{ with .Params.subtitle}}
+    <h2 class="font-light mt-0">{{ . }}</h2>
+    {{ end }}
+  </div>
+
+  <div>
+    {{ $gh := .Params.github }}
+    {{ if isset $gh "theme" }}
+    {{ $theme := (dict "theme" "")}}
+    {{ if ne (isset $gh.theme "btn_size") true }}
+    {{ $theme = merge $gh.theme (merge $theme (dict "btn_size" "large")) }}
+    {{ end }}
+    {{ if ne (isset $gh.theme "theme") true }}
+    {{ $theme = merge $gh.theme (merge $theme (dict "default" "light")) }}
+    {{ end }}
+    {{ if ne (isset $gh.theme "light") true }}
+    {{ $theme = merge $gh.theme (merge $theme (dict "light" true)) }}
+    {{ end }}
+    {{ if ne (isset $gh.theme "dark") true }}
+    {{ $theme = merge $gh.theme (merge $theme (dict "dark" true)) }}
+    {{ end }}
+    {{ if ne (isset $gh.theme "show_count") true }}
+    {{ $theme = merge $gh.theme (merge $theme (dict "show_count" true)) }}
+    {{ end }}
+    {{ $gh = merge $gh (dict "theme" $theme) }}
+    {{ else }}
+    {{ $gh = merge $gh (dict "theme" (dict "" "")) }}
+    {{ end }}
+
+    <div class="flex justify-between">
+      {{ range $_, $repo := .Params.github.repo}}
+      {{ $repo = merge $gh $repo }}
+      <div class="flex-1 px-4">
+        {{ partial "gh-card" $repo }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
