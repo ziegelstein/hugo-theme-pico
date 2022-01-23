@@ -8,13 +8,13 @@ module.exports = (obj, {
 	vw
 }) => {
 	if (std) {
-		for (unit of units) {
+		for (const unit of units) {
 			obj[`${unit}`] = `${unit * 0.25}rem`;
 		}
 	}
 
 	if (negative) {
-		for (unit of units) {
+		for (const unit of units) {
 			obj[`-${unit}`] = `${-unit * 0.25}rem`;
 		}
 	}

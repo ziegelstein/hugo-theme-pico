@@ -1,20 +1,24 @@
+const fs = require('fs')
+
 const path = require('path')
 
-const themeDir = __dirname
+const wd = __dirname
+const assetsDir = path.join(wd, '..')
 
 const purgecss = require('@fullhuman/postcss-purgecss')({
   // Specify the paths to all of the template files in your project
   content: [
-    '**/*.html'
+    './themes/pico/layouts/**/*.html',
+    './layouts/**/*.html'
   ],
 
   // This is the function used to extract class names from your templates
   defaultExtractor: content => {
     // Capture as liberally as possible, including things like `h-(screen-1.5)`
-    const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s]/g) || []
+    const broadMatches = content.match(/[^<>\"'`\s]*[^<>\"'`\s]/g) || []
 
     // Capture classes within other delimiters like .block(class="w-1/2") in Pug
-    const innerMatches = content.match(/[^<>"'`\s.()]*[^<>"'`\s.()]/g) || []
+    const innerMatches = content.match(/[^<>\"'`\s.()]*[^<>\"'`\s.()]/g) || []
 
     return broadMatches.concat(innerMatches)
   }
@@ -23,12 +27,10 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 module.exports = {
   plugins: [
     require('postcss-import')({
-      path: [themeDir]
+      path: [assetsDir]
     }),
-    require('tailwindcss')(path.join(themeDir, 'tailwind.config.js')),
-    require('autoprefixer')({
-      path: [themeDir]
-    }),
+    require('tailwindcss')(path.join(wd, 'tailwind.config.js')),
+    require('autoprefixer')(),
     ...(process.env.HUGO_ENVIRONMENT === 'production' ? [purgecss] : [])
   ]
 }

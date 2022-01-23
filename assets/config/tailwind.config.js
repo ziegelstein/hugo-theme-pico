@@ -26,6 +26,10 @@ const maxHeight = generator({
 })
 
 module.exports = {
+  content: [
+    './themes/pico/layouts/**/*.html',
+    './layouts/**/*.html'
+  ],
   darkMode: 'class',
   theme: {
     inset,
@@ -102,13 +106,6 @@ module.exports = {
       16: '0 8px 10px -5px rgba(0,0,0,0.2), 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12)',
       soft: '0 30px 60px -10px rgba(0,0,0,.22), 0 18px 36px -18px rgba(0,0,0,.25)'
     }
-  },
-  variants: {
-    backgroundColor: ['hover', 'active', 'dark'],
-    fontWeight: ['hover', 'focus'],
-    scale: ['hover', 'active'],
-    border: ['focus'],
-    textColor: ['hover', 'dark']
   },
   plugins: []
 }
